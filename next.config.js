@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
+  output: 'export',
   images: {
     unoptimized: true,
     domains: ['cross-w.netlify.app'],
@@ -11,6 +11,9 @@ const nextConfig = {
   generateEtags: true,
   compress: true,
   productionBrowserSourceMaps: false,
+  distDir: 'out',
+  trailingSlash: true,
+  assetPrefix: '',
 }
 
 module.exports = nextConfig 

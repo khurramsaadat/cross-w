@@ -232,3 +232,20 @@ cross-word/
 ├── tsconfig.json
 └── next-sitemap.config.js
 ``` 
+
+## [0.2.3] - 2024-03-19
+### Fixed
+- Static asset loading issues after deployment
+  - Updated Next.js configuration to use static export
+  - Changed output directory to 'out'
+  - Added proper asset prefix configuration
+  - Fixed trailing slash handling
+- Netlify deployment configuration
+  - Updated publish directory to 'out'
+  - Fixed static file serving
+  - Added force flag to redirects
+  - Simplified build process
+- Build process improvements
+  - Added next export to build script
+  - Removed unnecessary function handlers
+  - Optimized static file handling
