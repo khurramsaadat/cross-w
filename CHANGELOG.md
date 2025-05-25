@@ -249,3 +249,52 @@ cross-word/
   - Added next export to build script
   - Removed unnecessary function handlers
   - Optimized static file handling
+
+## [0.2.4] - 2024-03-19
+### Fixed
+- Build script issues
+  - Removed `next export` command as it's no longer needed with Next.js 14
+  - Updated @netlify/plugin-nextjs to latest version (5.11.2)
+  - Fixed build command to use Next.js static export
+  - Resolved build failure on Netlify
+- Build configuration
+  - Aligned with Next.js 14 static export requirements
+  - Simplified build process
+  - Updated dependencies to latest versions
+
+### Changed
+- Updated Netlify configuration
+  - Added security headers
+  - Configured proper caching
+  - Updated build settings
+  - Added esbuild configuration
+- Improved Next.js settings
+  - Disabled source maps in production
+  - Added ETag generation
+  - Enabled compression
+  - Removed powered by header
+
+### Current Directory Structure
+```
+cross-word/
+├── .git/
+├── .next/
+├── app/
+├── components/
+├── docs/
+│   ├── PRD.md
+│   ├── rules.md
+│   └── suggest.md
+├── lib/
+├── node_modules/
+├── public/
+├── .gitignore
+├── CHANGELOG.md
+├── README.md
+├── next-env.d.ts
+├── next.config.js
+├── netlify.toml
+├── package.json
+├── tsconfig.json
+└── next-sitemap.config.js
+``` 
