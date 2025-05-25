@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-background: #1A2B3C;
+  --color-surface: #ffffff;
+  --color-text-primary: #000000;
+  --color-text-secondary: #ffffff;
+  
+  /* Game Colors */
+  --color-selection: #ffeb3b;
+  --color-found: #4caf50;
+  --color-hint: #2196f3;
+  --color-unfound: #424242;
+  
+  /* Animation Timings */
+  --transition-fast: 150ms;
+  --transition-normal: 250ms;
+  --transition-slow: 400ms;
+}
+
+@layer base {
+  body {
+    @apply bg-[var(--color-background)] min-h-screen font-sans antialiased text-[var(--color-text-secondary)];
+  }
+}
+
+@layer components {
+  .game-container {
+    @apply min-h-screen p-4 relative w-full flex flex-col gap-4 max-w-[430px] mx-auto;
+  }
+
+  .game-grid {
+    @apply grid grid-cols-8 gap-[3px] h-full;
+  }
+
+  .game-cell {
+    @apply w-full aspect-square bg-[var(--color-surface)] 
+           rounded-lg flex items-center justify-center 
+           text-2xl font-bold cursor-pointer select-none 
+           transition-all duration-[var(--transition-fast)] 
+           hover:bg-gray-50 active:scale-95 
+           text-[var(--color-text-primary)];
+  }
+
+  .game-cell-selected {
+    @apply bg-[var(--color-selection)] text-[var(--color-text-primary)] 
+           shadow-md scale-105;
+  }
+
+  .game-cell-found {
+    @apply bg-[var(--color-found)] text-[var(--color-text-secondary)] 
+           shadow-md scale-100;
+  }
+
+  .game-cell-hint {
+    @apply bg-[var(--color-hint)] text-[var(--color-text-secondary)] 
+           animate-pulse shadow-md scale-105;
+  }
+
+  .word-item {
+    @apply px-4 py-2 rounded-full text-sm font-bold 
+           transition-all duration-[var(--transition-normal)] 
+           text-center shadow-sm;
+  }
+
+  .word-item-found {
+    @apply bg-[var(--color-found)] text-[var(--color-text-secondary)] 
+           scale-100 relative 
+           after:content-['✓'] after:absolute after:right-2 
+           after:top-1/2 after:-translate-y-1/2 after:text-white 
+           after:text-sm after:font-bold;
+  }
+
+  .word-item-unfound {
+    @apply bg-[var(--color-unfound)] text-[var(--color-text-secondary)] 
+           opacity-80 hover:opacity-100;
+  }
+}
+
+@layer utilities {
+  @keyframes success-bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+
+  .word-found-animation {
+    animation: success-bounce 0.5s ease-in-out;
+  }
+} 

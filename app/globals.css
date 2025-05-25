@@ -1,8 +1,35 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Base Colors */
+  --color-background: #1A2B3C;
+  --color-surface: #ffffff;
+  --color-text-primary: #000000;
+  --color-text-secondary: #ffffff;
+  
+  /* Game Colors */
+  --color-selection: #ffeb3b;     /* Softer yellow for better visibility */
+  --color-found: #4caf50;         /* Material green for found words */
+  --color-hint: #2196f3;          /* Material blue for hints */
+  --color-unfound: #424242;       /* Darker gray for better contrast */
+  
+  /* Category Colors */
+  --gradient-primary: linear-gradient(135deg, #3f51b5, #7e57c2);    /* Indigo to Deep Purple */
+  --gradient-secondary: linear-gradient(135deg, #e91e63, #ff4081);   /* Pink shades */
+  --gradient-success: linear-gradient(135deg, #4caf50, #81c784);     /* Green shades */
+  --gradient-warning: linear-gradient(135deg, #ff9800, #ffb74d);     /* Orange shades */
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+  
+  /* Animation Timings */
+  --transition-fast: 150ms;
+  --transition-normal: 250ms;
+  --transition-slow: 400ms;
 }
 
 @theme inline {
@@ -23,4 +50,189 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-[var(--color-background)] min-h-screen font-sans antialiased text-[var(--color-text-secondary)];
+  }
+}
+
+@layer components {
+  .game-container {
+    @apply min-h-screen p-4 relative w-full flex flex-col gap-4 max-w-[430px] mx-auto;
+  }
+
+  .game-header-section {
+    @apply h-14 flex justify-between items-center;
+  }
+
+  .category-name-display {
+    @apply flex items-center gap-2 text-lg font-bold text-blue-500;
+  }
+
+  .category-name-display .category-icon {
+    @apply text-2xl text-blue-400;
+  }
+
+  .game-word-section {
+    @apply h-16 flex items-center justify-center mb-2;
+  }
+
+  .selected-word-display {
+    @apply text-3xl font-bold text-[var(--color-text-primary)] bg-[var(--color-selection)] rounded-2xl px-6 py-2 w-fit shadow-[var(--shadow-md)] transform transition-all duration-[var(--transition-normal)] scale-100 hover:scale-105;
+  }
+
+  .game-grid-section {
+    @apply w-full mb-4;
+  }
+
+  .game-grid-container {
+    @apply w-full aspect-square bg-[var(--color-surface)] rounded-2xl p-3 shadow-[var(--shadow-lg)] border border-white/10;
+  }
+
+  .game-grid {
+    @apply grid grid-cols-8 gap-[3px] h-full;
+  }
+
+  .game-cell {
+    @apply w-full aspect-square bg-[var(--color-surface)] 
+           rounded-lg flex items-center justify-center 
+           text-2xl font-bold cursor-pointer select-none 
+           transition-all duration-[var(--transition-fast)] 
+           hover:bg-gray-50 active:scale-95 
+           text-[var(--color-text-primary)];
+  }
+
+  .game-cell-selected {
+    @apply bg-[var(--color-selection)] text-[var(--color-text-primary)] 
+           shadow-md scale-105;
+  }
+
+  /* Base styles for found cells - will be overridden by specific colors */
+  .game-cell-found {
+    @apply shadow-md scale-100 text-[var(--color-text-secondary)];
+  }
+
+  .game-cell-hint {
+    @apply bg-[var(--color-hint)] text-[var(--color-text-secondary)] 
+           animate-pulse shadow-md scale-105;
+  }
+
+  .hint-counter {
+    @apply flex items-center gap-2 bg-[var(--color-selection)] rounded-full px-4 py-2 shadow-[var(--shadow-md)] w-fit transition-all duration-[var(--transition-normal)] hover:scale-105 active:scale-95;
+  }
+
+  .hint-counter-icon {
+    @apply w-5 h-5 text-[var(--color-text-primary)];
+  }
+
+  .hint-counter-number {
+    @apply text-lg font-bold text-[var(--color-text-primary)];
+  }
+
+  .word-list {
+    @apply mt-4 px-2 py-1;
+  }
+
+  .word-list-grid {
+    @apply grid grid-cols-2 gap-2;
+  }
+
+  .word-item {
+    @apply px-4 py-2 rounded-full text-sm font-bold 
+           transition-all duration-[var(--transition-normal)] 
+           text-center shadow-sm;
+  }
+
+  /* Word list item styles */
+  .word-item-unfound {
+    @apply bg-[var(--color-unfound)] text-[var(--color-text-secondary)] 
+           opacity-80 hover:opacity-100;
+  }
+
+  /* Color classes for found words */
+  .bg-yellow-300 {
+    @apply bg-yellow-300 text-black;
+  }
+
+  .bg-blue-400 {
+    @apply bg-blue-400 text-white;
+  }
+
+  .bg-green-400 {
+    @apply bg-green-400 text-white;
+  }
+
+  .bg-purple-400 {
+    @apply bg-purple-400 text-white;
+  }
+
+  .bg-pink-400 {
+    @apply bg-pink-400 text-white;
+  }
+
+  .bg-orange-400 {
+    @apply bg-orange-400 text-white;
+  }
+
+  .word-item-found {
+    @apply bg-[var(--color-found)] text-[var(--color-text-secondary)] scale-100 hover:brightness-110 relative after:content-['✓'] after:absolute after:right-2 after:top-1/2 after:-translate-y-1/2 after:text-white after:text-sm after:font-bold;
+  }
+
+  .word-item-highlight {
+    @apply bg-[var(--color-selection)] text-[var(--color-text-primary)] scale-110 shadow-[var(--shadow-md)] z-10;
+  }
+
+  .category-grid {
+    @apply grid grid-cols-4 gap-3 p-4;
+  }
+
+  .category-card {
+    @apply w-full aspect-square rounded-2xl p-3 flex flex-col items-center justify-center gap-2
+           shadow-[var(--shadow-lg)] transition-all duration-[var(--transition-normal)]
+           hover:scale-105 active:scale-95 text-[var(--color-text-secondary)]
+           bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm
+           border border-white/10;
+  }
+
+  .category-icon {
+    @apply text-3xl mb-1 opacity-90;
+  }
+
+  .category-name {
+    @apply text-[11px] font-bold text-center uppercase tracking-wider opacity-80;
+  }
+
+  /* Animations */
+  @keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+
+  .animate-pop {
+    animation: pop var(--transition-normal) ease-in-out;
+  }
+
+  /* Game Header Styles */
+  .game-header {
+    @apply text-3xl font-bold text-[var(--color-text-secondary)] text-center mb-4
+           bg-gradient-to-r from-white/90 to-white bg-clip-text text-transparent;
+  }
+
+  .game-subheader {
+    @apply text-xl font-semibold text-[var(--color-text-secondary)] text-center mb-6 opacity-80;
+  }
+}
+
+@layer utilities {
+  @keyframes success-bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+
+  .word-found-animation {
+    animation: success-bounce 0.5s ease-in-out;
+  }
 }
