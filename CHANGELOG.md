@@ -298,3 +298,13 @@ cross-word/
 ├── tsconfig.json
 └── next-sitemap.config.js
 ``` 
+
+## [0.2.5] - 2024-03-19
+### Fixed
+- MIME type issues in Netlify deployment
+  - Added proper Content-Type headers for CSS files
+  - Added proper Content-Type headers for JavaScript files
+  - Fixed static file serving configuration
+- Build configuration
+  - Improved static file handling
+  - Enhanced caching configuration
