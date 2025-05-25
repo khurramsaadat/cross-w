@@ -179,3 +179,56 @@ cross-word/
 - Added next-sitemap dependency
 - Configured standalone output
 - Disabled image optimization for static export 
+
+## [0.2.2] - 2024-03-19
+### Fixed
+- TypeScript configuration issues
+  - Updated moduleResolution to "node"
+  - Added proper typeRoots configuration
+  - Fixed Next.js types integration
+- Next.js configuration
+  - Converted next.config.ts to next.config.js
+  - Added proper image domains
+  - Optimized production settings
+- Build system improvements
+  - Fixed build process for Netlify deployment
+  - Added proper security headers
+  - Configured caching for static assets
+  - Added compression settings
+
+### Changed
+- Updated Netlify configuration
+  - Added security headers
+  - Configured proper caching
+  - Updated build settings
+  - Added esbuild configuration
+- Improved Next.js settings
+  - Disabled source maps in production
+  - Added ETag generation
+  - Enabled compression
+  - Removed powered by header
+
+### Current Directory Structure
+```
+cross-word/
+├── .git/
+├── .next/
+├── app/
+├── components/
+├── docs/
+│   ├── PRD.md
+│   ├── rules.md
+│   └── suggest.md
+├── lib/
+├── node_modules/
+├── public/
+├── .gitignore
+├── CHANGELOG.md
+├── README.md
+├── next-env.d.ts
+├── next.config.js
+├── netlify.toml
+├── package.json
+├── tsconfig.json
+└── next-sitemap.config.js
+``` 

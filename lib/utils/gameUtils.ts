@@ -8,6 +8,10 @@ export function createEmptyGrid(size: number = GRID_SIZE): GridCell[][] {
     Array(size).fill(null).map((_, col) => ({
       letter: '',
       position: { row, col },
+      isSelected: false,
+      isFound: false,
+      isHint: false,
+      foundColor: undefined
     }))
   );
 }
