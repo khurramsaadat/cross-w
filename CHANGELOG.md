@@ -308,3 +308,14 @@ cross-word/
 - Build configuration
   - Improved static file handling
   - Enhanced caching configuration
+
+## [0.2.6] - 2024-03-19
+### Fixed
+- Static asset handling in Netlify deployment
+  - Added proper redirects for Next.js static files
+  - Updated static file path handling
+  - Added media file caching configuration
+  - Fixed 404 errors for static assets
+- Build configuration
+  - Improved static asset serving
+  - Enhanced caching strategy for all static files
